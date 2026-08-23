@@ -1,26 +1,38 @@
-﻿$ErrorActionPreference = 'Stop'; 
+$ErrorActionPreference = 'Stop'
 
-$packageName= 'supercollider'
-$toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url        = 'https://github.com/supercollider/supercollider/releases/download/Version-3.12.1/SuperCollider-3.12.1_Release-x86-VS-b678713.exe' 
-$url64      = 'https://github.com/supercollider/supercollider/releases/download/Version-3.12.1/SuperCollider-3.12.1_Release-x64-VS-b678713.exe' 
-
-$packageArgs = @{
-  packageName   = $packageName
-  unzipLocation = $toolsDir
-  fileType      = 'EXE'
-  url           = $url
-  url64bit      = $url64
-
-  softwareName  = 'SuperCollider Version 3.12.1'
-
-  checksum      = 'ce46fb916cc80b2608df67b6898ebb730fc9c4ca8299a073bdbaccf50244c06b'
-  checksumType  = 'sha256' 
-  checksum64    = '2b08130a4f9e760df7c3a7e91aa5ff05e6c2930d95e7f1d2997d5aa3dcb95da7'
-  checksumType64= 'sha256' 
-
-  validExitCodes= @(0, 3010, 1641)
-  silentArgs   = '/S'
+if (-not [Environment]::Is64BitOperatingSystem) {
+  throw 'SuperCollider 3.14.1 package supports only 64-bit Windows.'
 }
 
-Install-ChocolateyPackage @packageArgs 
+$packageName = 'supercollider'
+$version = '3.14.1'
+$assetName = 'SuperCollider-3.14.1_Release-x64-VS-426edf6.exe'
+$releaseApi = "https://api.github.com/repos/supercollider/supercollider/releases/tags/Version-$version"
+
+Write-Host "Resolving official SuperCollider $version release asset..."
+$headers = @{ 'User-Agent' = 'sc-chocolatey' }
+$release = Invoke-RestMethod -Uri $releaseApi -Headers $headers
+$asset = $release.assets | Where-Object { $_.name -eq $assetName } | Select-Object -First 1
+
+if (-not $asset) {
+  throw "Could not find $assetName in SuperCollider release Version-$version."
+}
+
+if (-not $asset.digest -or $asset.digest -notmatch '^sha256:([0-9a-fA-F]{64})$') {
+  throw "GitHub did not provide a valid SHA-256 digest for $assetName."
+}
+
+$checksum = $Matches[1]
+
+$packageArgs = @{
+  packageName    = $packageName
+  fileType       = 'EXE'
+  url            = $asset.browser_download_url
+  softwareName   = "SuperCollider Version $version"
+  checksum       = $checksum
+  checksumType   = 'sha256'
+  validExitCodes = @(0, 3010, 1641)
+  silentArgs     = '/S'
+}
+
+Install-ChocolateyPackage @packageArgs
