@@ -1,32 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>SuperCollider</id>
-    <version>3.12.1.0</version>
+    <version>3.14.1</version>
     <packageSourceUrl>https://github.com/supercollider/sc-chocolatey</packageSourceUrl>
     <title>SuperCollider for Windows</title>
     <owners>Mike Hodnick</owners>
     <authors>SuperCollider Authors</authors>
     <projectUrl>https://supercollider.github.io</projectUrl>
-    <iconUrl>http://supercollider.github.io/images/sc_cube_32x32.png</iconUrl>
-    <licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
+    <iconUrl>https://supercollider.github.io/images/sc_cube_32x32.png</iconUrl>
+    <licenseUrl>https://github.com/supercollider/supercollider/blob/3.14/COPYING</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <projectSourceUrl>https://github.com/supercollider/supercollider</projectSourceUrl>
-    <docsUrl>http://doc.sccode.org/</docsUrl>
-    <mailingListUrl>http://new-supercollider-mailing-lists-forums-use-these.2681727.n2.nabble.com/</mailingListUrl>
+    <docsUrl>https://docs.supercollider.online/</docsUrl>
     <bugTrackerUrl>https://github.com/supercollider/supercollider/issues</bugTrackerUrl>
-    <releaseNotes>https://github.com/supercollider/sc-chocolatey/blob/master/supercollider/changelog.md</releaseNotes>
+    <releaseNotes>https://github.com/supercollider/supercollider/releases/tag/Version-3.14.1</releaseNotes>
     <tags>supercollider admin audio</tags>
     <summary>SuperCollider install for Windows.</summary>
-    <description>SuperCollider is a platform for audio synthesis and algorithmic composition, 
-    used by musicians, artists, and researchers working with sound. It is free and open 
+    <description>SuperCollider is a platform for audio synthesis and algorithmic composition,
+    used by musicians, artists, and researchers working with sound. It is free and open
     source software available for Windows, macOS, and Linux.
-    
-    Requires the git.install package to be installed so that the SuperCollider Quarks feature
+
+    Requires the git package to be installed so that the SuperCollider Quarks feature
     works correctly.</description>
-  <dependencies>
-    <dependency id="git" version="2.33.1" />
-  </dependencies>
+    <dependencies>
+      <dependency id="git" version="2.33.1" />
+    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
