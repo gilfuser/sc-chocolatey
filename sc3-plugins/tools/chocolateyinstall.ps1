@@ -6,23 +6,8 @@ if (-not [Environment]::Is64BitOperatingSystem) {
 
 $packageName = 'sc3plugins'
 $version = '3.14.0'
-$assetName = 'sc3-plugins-3.14.0-Windows-64bit.zip'
-$releaseApi = "https://api.github.com/repos/supercollider/sc3-plugins/releases/tags/Version-$version"
-$headers = @{ 'User-Agent' = 'sc-chocolatey' }
-
-Write-Host "Resolving official sc3-plugins $version release asset..."
-$release = Invoke-RestMethod -Uri $releaseApi -Headers $headers
-$asset = $release.assets | Where-Object { $_.name -eq $assetName } | Select-Object -First 1
-
-if (-not $asset) {
-  throw "Could not find $assetName in sc3-plugins release Version-$version."
-}
-
-if (-not $asset.digest -or $asset.digest -notmatch '^sha256:([0-9a-fA-F]{64})$') {
-  throw "GitHub did not provide a valid SHA-256 digest for $assetName."
-}
-
-$checksum = $Matches[1]
+$url = 'https://github.com/supercollider/sc3-plugins/releases/download/Version-3.14.0/sc3-plugins-3.14.0-Windows-64bit.zip'
+$checksum = '603965BC93FECEA3928FB77AC1ACD13825474D2F449134A72AEE3D45257D8561'
 $extensionsDir = Join-Path $env:LOCALAPPDATA 'SuperCollider\Extensions'
 $pluginsDir = Join-Path $extensionsDir 'SC3plugins'
 $legacyInstallDir = Join-Path $extensionsDir 'install'
@@ -53,7 +38,7 @@ New-Item -ItemType Directory -Path $extractDir -Force | Out-Null
 try {
   Install-ChocolateyZipPackage `
     -PackageName $packageName `
-    -Url $asset.browser_download_url `
+    -Url $url `
     -UnzipLocation $extractDir `
     -Checksum $checksum `
     -ChecksumType 'sha256'
