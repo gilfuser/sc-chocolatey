@@ -1,28 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>sc3plugins</id>
-    <version>3.11.1</version>
+    <version>3.14.0</version>
     <packageSourceUrl>https://github.com/supercollider/sc-chocolatey</packageSourceUrl>
     <title>SuperCollider sc3-plugins</title>
     <authors>SuperCollider Authors</authors>
     <owners>Mike Hodnick</owners>
-    <projectUrl>https://supercollider.github.io</projectUrl>
+    <projectUrl>https://github.com/supercollider/sc3-plugins</projectUrl>
     <iconUrl>https://cdn.statically.io/gh/supercollider/supercollider.github.io/f443aa3dc03df0d17c0742af646752b215cd8ff7/images/favicon.png</iconUrl>
-    <licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>
+    <licenseUrl>https://github.com/supercollider/sc3-plugins/blob/Version-3.14.0/COPYING</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <projectSourceUrl>https://github.com/supercollider/sc3-plugins</projectSourceUrl>
-    <docsUrl>http://doc.sccode.org/</docsUrl>
-    <bugTrackerUrl>https://github.com/supercollider/supercollider/issues</bugTrackerUrl>
+    <docsUrl>https://docs.supercollider.online/</docsUrl>
+    <bugTrackerUrl>https://github.com/supercollider/sc3-plugins/issues</bugTrackerUrl>
+    <releaseNotes>https://github.com/supercollider/sc3-plugins/releases/tag/Version-3.14.0</releaseNotes>
     <tags>supercollider sc3-plugins audio</tags>
-    <summary>SuperCollider sc3-plugins install for Windows.</summary>
-    <description>This package contains the community collection of unit generator plugins for SuperCollider. 
-    It extends the functionality of SuperCollider by additional UGens that run on scsynth, 
-    the SuperCollider audio synthesis server.</description>
-    <releaseNotes>https://github.com/supercollider/sc-chocolatey/blob/master/sc3-plugins/changelog.md</releaseNotes>
-  <dependencies>
-    <dependency id="supercollider" version="3.11.2"/>
-  </dependencies>
+    <summary>SuperCollider sc3-plugins 3.14.0 install for Windows.</summary>
+    <description>Installs the official 64-bit sc3-plugins 3.14.0 release into the current user's SuperCollider Extensions directory. The release asset URL and SHA-256 digest are resolved from the pinned GitHub release at install time.</description>
+    <dependencies>
+      <dependency id="supercollider" version="[3.14.1]" />
+    </dependencies>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
